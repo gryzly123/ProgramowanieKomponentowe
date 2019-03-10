@@ -67,11 +67,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Connected Services\ServiceTime\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Connected Services\ServiceWeather\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -176,76 +171,6 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ServiceResolve\ip2geo.wsdl" />
-    <None Include="Connected Services\ServiceTime\Comp02_NetAssembly.ServiceTime.CancelOrderByOrderIDResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ServiceTime\Comp02_NetAssembly.ServiceTime.CancelOrderByReferenceNumberResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ServiceTime\Comp02_NetAssembly.ServiceTime.CancelOrderResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ServiceTime\Comp02_NetAssembly.ServiceTime.DealRequestAtBestResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ServiceTime\Comp02_NetAssembly.ServiceTime.DealRequestByDealIdResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ServiceTime\Comp02_NetAssembly.ServiceTime.DealRequestResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ServiceTime\Comp02_NetAssembly.ServiceTime.ModifyIfThenOCOOrderResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ServiceTime\Comp02_NetAssembly.ServiceTime.ModifyIfThenOrderResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ServiceTime\Comp02_NetAssembly.ServiceTime.ModifyOCOASSPOrderResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ServiceTime\Comp02_NetAssembly.ServiceTime.ModifyOCOOrderResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ServiceTime\Comp02_NetAssembly.ServiceTime.ModifySingleASSPOrderResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ServiceTime\Comp02_NetAssembly.ServiceTime.ModifySingleOrderResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ServiceTime\Comp02_NetAssembly.ServiceTime.objAccount.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ServiceTime\Comp02_NetAssembly.ServiceTime.objDealResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ServiceTime\Comp02_NetAssembly.ServiceTime.objMarketText.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ServiceTime\Comp02_NetAssembly.ServiceTime.objPlaceOrderResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ServiceTime\Comp02_NetAssembly.ServiceTime.objProductSubscriptionResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ServiceTime\Comp02_NetAssembly.ServiceTime.PlaceIfThenOCOOrderResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ServiceTime\Comp02_NetAssembly.ServiceTime.PlaceIfThenOrderResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ServiceTime\Comp02_NetAssembly.ServiceTime.PlaceOCOASSPOrderResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ServiceTime\Comp02_NetAssembly.ServiceTime.PlaceOCOOrderResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ServiceTime\Comp02_NetAssembly.ServiceTime.PlaceSingleASSPOrderResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ServiceTime\Comp02_NetAssembly.ServiceTime.PlaceSingleOrderResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ServiceTime\service.wsdl" />
     <None Include="Connected Services\ServiceWeather\ndfdXMLserver.wsdl" />
     <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
     <None Include="Properties\Settings.settings">
@@ -269,7 +194,6 @@
     <WCFMetadataStorage Include="Connected Services\ServicePublicData\" />
     <WCFMetadataStorage Include="Connected Services\ServiceReferenceQuotes\" />
     <WCFMetadataStorage Include="Connected Services\ServiceResolve\" />
-    <WCFMetadataStorage Include="Connected Services\ServiceTime\" />
     <WCFMetadataStorage Include="Connected Services\ServiceWeather\" />
   </ItemGroup>
   <ItemGroup>
@@ -298,21 +222,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ServiceResolve\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ServiceTime\service.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ServiceTime\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ServiceTime\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ServiceTime\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
