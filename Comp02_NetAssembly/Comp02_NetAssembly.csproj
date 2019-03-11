@@ -67,11 +67,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Connected Services\ServiceWeather\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -171,7 +166,6 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ServiceResolve\ip2geo.wsdl" />
-    <None Include="Connected Services\ServiceWeather\ndfdXMLserver.wsdl" />
     <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -194,7 +188,6 @@
     <WCFMetadataStorage Include="Connected Services\ServicePublicData\" />
     <WCFMetadataStorage Include="Connected Services\ServiceReferenceQuotes\" />
     <WCFMetadataStorage Include="Connected Services\ServiceResolve\" />
-    <WCFMetadataStorage Include="Connected Services\ServiceWeather\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ServiceReferenceQuotes\delayedstockquote.disco" />
@@ -249,18 +242,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ServicePublicData\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ServiceWeather\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ServiceWeather\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ServiceWeather\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
