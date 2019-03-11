@@ -18,11 +18,17 @@ namespace Comp02_NetAssembly
             InitializeComponent();
         }
 
+        //StockQuote API wygląda na uszkodzone - zawsze zwraca zera.
+        //GOOG - 0.00
+        //MSFT - 0.00
+        //AAPL - 0.00
+        //FB   - 0.00
+        //TWTR - 0.00
         #region StockQuote
         string StockQuoteSync(string Stock)
         {
             var ServiceClient = new ServiceReferenceQuotes.DelayedStockQuoteSoapClient("DelayedStockQuoteSoap");
-            return ServiceClient.GetQuickQuote(Stock, "0").ToString();
+            return ServiceClient.GetQuickQuote(Stock, "0").ToString("0.00");
         }
         Task<decimal> StockQuoteAsync(string Stock)
         {
@@ -31,7 +37,7 @@ namespace Comp02_NetAssembly
         }
         string EndStockQuote(Task<decimal> StockQuote)
         {
-            return StockQuote.Result.ToString();
+            return StockQuote.Result.ToString("0.00");
         }
 
         private void btnStockQuoteSync_Click(object sender, EventArgs e)
@@ -48,12 +54,20 @@ namespace Comp02_NetAssembly
         }
         #endregion
 
+
+        //IP2Geo - zwraca dane "okazjonalnie"- losowo pomija niektóre
+        //pola, warto wysłać zapytanie kilkukronie.
+        //Onet            - 213.180.141.140 - ??? (Poland)
+        //ZUT             - 212.14.18.124   - Szczecin (Poland)
+        //WP              - 212.77.98.9     - ??? (???)
+        //kniedzwiecki.eu - 178.32.205.96   - ??? (Poland)
+        //slack           - 52.84.198.158   - Seattle (United States)
         #region IpGeo
         private string FormatIpgeo(string Ip, ServiceResolve.IPInformation IpInfo)
         {
             return string.Format("{0}\r\n{1}\r\n{2}\r\n",
                 IpInfo.Country,
-                IpInfo.Organization,
+                IpInfo.City,
                 Ip
                 );
         }
@@ -199,6 +213,9 @@ namespace Comp02_NetAssembly
         }
         #endregion
 
+        //Adres usługi GlobalWeather nie działa, dlatego użyty został
+        //OpenWeatherMap. Strona OWM nie wspomina nic o SOAP API, dlatego
+        //w zamian użyte zostało zapytanie HTTP GET.
         #region Weather
         private readonly HttpClient owmClient = new HttpClient();
         private readonly string owmApiKey = "c858c1cd867a64fa4ec99f3775852c8f";
@@ -281,6 +298,12 @@ namespace Comp02_NetAssembly
         }
         #endregion
 
+        //Czas zapytań synchronicznych  (batch request)    : 6796ms
+        //Czas zapytań asynchronicznych (batch request)    : 5564ms
+
+        //Wniosek: asynchroniczne zapytania wykonały się szybciej, ponieważ
+        //wszystkie zadania "odpaliły się" jednocześnie w różnych wątkach
+        //zamiast wykonywać się po kolei (start->koniec->start->koniec itd.)
         #region Batch request
         private bool ValidateForms()
         {
