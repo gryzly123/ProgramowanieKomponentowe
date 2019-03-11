@@ -1,6 +1,6 @@
 ﻿namespace Comp02_NetAssembly
 {
-    partial class Form1
+    partial class MainWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -55,39 +55,24 @@
             this.btnEchoSync = new System.Windows.Forms.Button();
             this.tbEchoInput = new System.Windows.Forms.TextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.tbVoivodeship = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.tbOrder = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.tbOrderOutput = new System.Windows.Forms.TextBox();
             this.btnOrderAsync = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.btnOrderSync = new System.Windows.Forms.Button();
             this.tbOrderer = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.tbOrder = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.tbVoivodeship = new System.Windows.Forms.TextBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.tbWeatherOutput = new System.Windows.Forms.RichTextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.btnWeatherAsync = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.btnWeatherSync = new System.Windows.Forms.Button();
             this.tbWeatherInput = new System.Windows.Forms.TextBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.l_asynctotal = new System.Windows.Forms.Label();
-            this.l_synctotal = new System.Windows.Forms.Label();
             this.l_poasync = new System.Windows.Forms.Label();
             this.l_owasync = new System.Windows.Forms.Label();
             this.l_posync = new System.Windows.Forms.Label();
@@ -100,9 +85,24 @@
             this.l_i2gsync = new System.Windows.Forms.Label();
             this.l_sqasync = new System.Windows.Forms.Label();
             this.l_sqsync = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.l_asynctotal = new System.Windows.Forms.Label();
+            this.l_synctotal = new System.Windows.Forms.Label();
             this.btnRunAllAsync = new System.Windows.Forms.Button();
             this.btnRunAllSync = new System.Windows.Forms.Button();
-            this.tbWeatherOutput = new System.Windows.Forms.RichTextBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -388,6 +388,40 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Public orders";
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 48);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(52, 13);
+            this.label11.TabIndex = 8;
+            this.label11.Text = "Voivode.:";
+            // 
+            // tbVoivodeship
+            // 
+            this.tbVoivodeship.Location = new System.Drawing.Point(59, 45);
+            this.tbVoivodeship.Name = "tbVoivodeship";
+            this.tbVoivodeship.Size = new System.Drawing.Size(113, 20);
+            this.tbVoivodeship.TabIndex = 7;
+            this.tbVoivodeship.Text = "Zachodniopomorskie";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(181, 22);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(36, 13);
+            this.label10.TabIndex = 6;
+            this.label10.Text = "Order:";
+            // 
+            // tbOrder
+            // 
+            this.tbOrder.Location = new System.Drawing.Point(234, 19);
+            this.tbOrder.Name = "tbOrder";
+            this.tbOrder.Size = new System.Drawing.Size(113, 20);
+            this.tbOrder.TabIndex = 5;
+            this.tbOrder.Text = "2";
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -442,40 +476,6 @@
             this.tbOrderer.TabIndex = 0;
             this.tbOrderer.Text = "99";
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(181, 22);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(36, 13);
-            this.label10.TabIndex = 6;
-            this.label10.Text = "Order:";
-            // 
-            // tbOrder
-            // 
-            this.tbOrder.Location = new System.Drawing.Point(234, 19);
-            this.tbOrder.Name = "tbOrder";
-            this.tbOrder.Size = new System.Drawing.Size(113, 20);
-            this.tbOrder.TabIndex = 5;
-            this.tbOrder.Text = "2";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 48);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(52, 13);
-            this.label11.TabIndex = 8;
-            this.label11.Text = "Voivode.:";
-            // 
-            // tbVoivodeship
-            // 
-            this.tbVoivodeship.Location = new System.Drawing.Point(59, 45);
-            this.tbVoivodeship.Name = "tbVoivodeship";
-            this.tbVoivodeship.Size = new System.Drawing.Size(113, 20);
-            this.tbVoivodeship.TabIndex = 7;
-            this.tbVoivodeship.Text = "Zachodniopomorskie";
-            // 
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.tbWeatherOutput);
@@ -490,6 +490,14 @@
             this.groupBox6.TabIndex = 7;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "OpenWeather";
+            // 
+            // tbWeatherOutput
+            // 
+            this.tbWeatherOutput.Location = new System.Drawing.Point(59, 72);
+            this.tbWeatherOutput.Name = "tbWeatherOutput";
+            this.tbWeatherOutput.Size = new System.Drawing.Size(113, 100);
+            this.tbWeatherOutput.TabIndex = 5;
+            this.tbWeatherOutput.Text = "";
             // 
             // label12
             // 
@@ -569,148 +577,6 @@
             this.groupBox7.TabIndex = 8;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Time stats [ms]";
-            // 
-            // label15
-            // 
-            this.label15.Location = new System.Drawing.Point(6, 22);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(60, 13);
-            this.label15.TabIndex = 1;
-            this.label15.Text = "SQ sync:";
-            this.label15.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // label14
-            // 
-            this.label14.Location = new System.Drawing.Point(127, 22);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(60, 13);
-            this.label14.TabIndex = 2;
-            this.label14.Text = "SQ async:";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // label16
-            // 
-            this.label16.Location = new System.Drawing.Point(6, 35);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(60, 13);
-            this.label16.TabIndex = 3;
-            this.label16.Text = "i2g sync:";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // label17
-            // 
-            this.label17.Location = new System.Drawing.Point(127, 35);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(60, 13);
-            this.label17.TabIndex = 4;
-            this.label17.Text = "i2g async:";
-            this.label17.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // label18
-            // 
-            this.label18.Location = new System.Drawing.Point(6, 48);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(60, 13);
-            this.label18.TabIndex = 5;
-            this.label18.Text = "time sync:";
-            this.label18.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // label19
-            // 
-            this.label19.Location = new System.Drawing.Point(127, 48);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(60, 13);
-            this.label19.TabIndex = 6;
-            this.label19.Text = "time async:";
-            this.label19.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // label20
-            // 
-            this.label20.Location = new System.Drawing.Point(6, 61);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(60, 13);
-            this.label20.TabIndex = 7;
-            this.label20.Text = "echo sync:";
-            this.label20.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // label23
-            // 
-            this.label23.Location = new System.Drawing.Point(120, 61);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(67, 13);
-            this.label23.TabIndex = 10;
-            this.label23.Text = "echo async:";
-            this.label23.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // label24
-            // 
-            this.label24.Location = new System.Drawing.Point(6, 74);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(60, 13);
-            this.label24.TabIndex = 11;
-            this.label24.Text = "OW sync:";
-            this.label24.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // label25
-            // 
-            this.label25.Location = new System.Drawing.Point(6, 87);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(60, 13);
-            this.label25.TabIndex = 12;
-            this.label25.Text = "PO sync:";
-            this.label25.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // label26
-            // 
-            this.label26.Location = new System.Drawing.Point(127, 74);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(60, 13);
-            this.label26.TabIndex = 13;
-            this.label26.Text = "OW async:";
-            this.label26.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // label27
-            // 
-            this.label27.Location = new System.Drawing.Point(127, 87);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(60, 13);
-            this.label27.TabIndex = 14;
-            this.label27.Text = "PO async:";
-            this.label27.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // label21
-            // 
-            this.label21.Location = new System.Drawing.Point(4, 74);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(60, 13);
-            this.label21.TabIndex = 16;
-            this.label21.Text = "TOTAL A:";
-            this.label21.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // label22
-            // 
-            this.label22.Location = new System.Drawing.Point(4, 61);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(60, 13);
-            this.label22.TabIndex = 15;
-            this.label22.Text = "TOTAL S:";
-            this.label22.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // l_asynctotal
-            // 
-            this.l_asynctotal.Location = new System.Drawing.Point(67, 74);
-            this.l_asynctotal.Name = "l_asynctotal";
-            this.l_asynctotal.Size = new System.Drawing.Size(46, 13);
-            this.l_asynctotal.TabIndex = 30;
-            this.l_asynctotal.Text = "-";
-            // 
-            // l_synctotal
-            // 
-            this.l_synctotal.Location = new System.Drawing.Point(67, 61);
-            this.l_synctotal.Name = "l_synctotal";
-            this.l_synctotal.Size = new System.Drawing.Size(46, 13);
-            this.l_synctotal.TabIndex = 29;
-            this.l_synctotal.Text = "-";
             // 
             // l_poasync
             // 
@@ -808,6 +674,148 @@
             this.l_sqsync.TabIndex = 17;
             this.l_sqsync.Text = "-";
             // 
+            // label27
+            // 
+            this.label27.Location = new System.Drawing.Point(127, 87);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(60, 13);
+            this.label27.TabIndex = 14;
+            this.label27.Text = "PO async:";
+            this.label27.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label26
+            // 
+            this.label26.Location = new System.Drawing.Point(127, 74);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(60, 13);
+            this.label26.TabIndex = 13;
+            this.label26.Text = "OW async:";
+            this.label26.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label25
+            // 
+            this.label25.Location = new System.Drawing.Point(6, 87);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(60, 13);
+            this.label25.TabIndex = 12;
+            this.label25.Text = "PO sync:";
+            this.label25.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label24
+            // 
+            this.label24.Location = new System.Drawing.Point(6, 74);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(60, 13);
+            this.label24.TabIndex = 11;
+            this.label24.Text = "OW sync:";
+            this.label24.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label23
+            // 
+            this.label23.Location = new System.Drawing.Point(120, 61);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(67, 13);
+            this.label23.TabIndex = 10;
+            this.label23.Text = "echo async:";
+            this.label23.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label20
+            // 
+            this.label20.Location = new System.Drawing.Point(6, 61);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(60, 13);
+            this.label20.TabIndex = 7;
+            this.label20.Text = "echo sync:";
+            this.label20.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label19
+            // 
+            this.label19.Location = new System.Drawing.Point(127, 48);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(60, 13);
+            this.label19.TabIndex = 6;
+            this.label19.Text = "time async:";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label18
+            // 
+            this.label18.Location = new System.Drawing.Point(6, 48);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(60, 13);
+            this.label18.TabIndex = 5;
+            this.label18.Text = "time sync:";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label17
+            // 
+            this.label17.Location = new System.Drawing.Point(127, 35);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(60, 13);
+            this.label17.TabIndex = 4;
+            this.label17.Text = "i2g async:";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label16
+            // 
+            this.label16.Location = new System.Drawing.Point(6, 35);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(60, 13);
+            this.label16.TabIndex = 3;
+            this.label16.Text = "i2g sync:";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label14
+            // 
+            this.label14.Location = new System.Drawing.Point(127, 22);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(60, 13);
+            this.label14.TabIndex = 2;
+            this.label14.Text = "SQ async:";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label15
+            // 
+            this.label15.Location = new System.Drawing.Point(6, 22);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(60, 13);
+            this.label15.TabIndex = 1;
+            this.label15.Text = "SQ sync:";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label21
+            // 
+            this.label21.Location = new System.Drawing.Point(4, 74);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(60, 13);
+            this.label21.TabIndex = 16;
+            this.label21.Text = "TOTAL A:";
+            this.label21.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label22
+            // 
+            this.label22.Location = new System.Drawing.Point(4, 61);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(60, 13);
+            this.label22.TabIndex = 15;
+            this.label22.Text = "TOTAL S:";
+            this.label22.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // l_asynctotal
+            // 
+            this.l_asynctotal.Location = new System.Drawing.Point(67, 74);
+            this.l_asynctotal.Name = "l_asynctotal";
+            this.l_asynctotal.Size = new System.Drawing.Size(46, 13);
+            this.l_asynctotal.TabIndex = 30;
+            this.l_asynctotal.Text = "-";
+            // 
+            // l_synctotal
+            // 
+            this.l_synctotal.Location = new System.Drawing.Point(67, 61);
+            this.l_synctotal.Name = "l_synctotal";
+            this.l_synctotal.Size = new System.Drawing.Size(46, 13);
+            this.l_synctotal.TabIndex = 29;
+            this.l_synctotal.Text = "-";
+            // 
             // btnRunAllAsync
             // 
             this.btnRunAllAsync.Location = new System.Drawing.Point(61, 15);
@@ -828,14 +836,6 @@
             this.btnRunAllSync.UseVisualStyleBackColor = true;
             this.btnRunAllSync.Click += new System.EventHandler(this.btnRunAllSync_Click);
             // 
-            // tbWeatherOutput
-            // 
-            this.tbWeatherOutput.Location = new System.Drawing.Point(59, 72);
-            this.tbWeatherOutput.Name = "tbWeatherOutput";
-            this.tbWeatherOutput.Size = new System.Drawing.Size(113, 100);
-            this.tbWeatherOutput.TabIndex = 5;
-            this.tbWeatherOutput.Text = "";
-            // 
             // groupBox8
             // 
             this.groupBox8.Controls.Add(this.btnRunAllAsync);
@@ -851,7 +851,7 @@
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Batch time stats [ms]";
             // 
-            // Form1
+            // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -864,8 +864,8 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "MainWindow";
+            this.Text = "SOAP API Tester (K. Niedzwiecki)";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
