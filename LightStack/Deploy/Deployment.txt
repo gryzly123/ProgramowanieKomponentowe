@@ -1,0 +1,44 @@
+Deployment of LightREST server on a new machine.
+
+Build the LightStack solution in Release mode to populate this folder with the latest files. 
+Then follow the steps below to set the server up on another machine. 
+The only pre-requiesite is that the machine has .NET4 installed.
+
+
+
+1. Create a folder to contain the files in this folder and copy them into the folder.
+2. The database file is assumed to be named "Badges.db" and located in the "My Documents" folder of the account that the server will be running in. 
+3. Open a command window and set the current directory to the installed folder
+4. Run SqliteBootStrap to create the database
+5. Create the namespace reservation for the port with:
+netsh http add urlacl url=http://+:8088/ user=Everyone
+6. Start the LightREST server.
+7. Use RestTester to perform a few tests: see below.
+8. Installation and testing should be complete.
+
+*** RestTester commands to test the server. ***
+
+- To view the seeded record
+resttester GET http://localhost:8088/Badges/1
+
+- To get a JSON string in the correct format to create POST data
+resttester GET http://localhost:8088/Badges/1 >post.txt
+
+- Edit the data in Notepad, remove the first line with OK on it, remove "Id":1, and change the other properties
+Notepad post.txt
+
+- to add the new Badge and verify that it is saved
+resttester POST http://localhost:8088/Badges post.txt
+
+- Edit the data in Notepad and change another property or two
+Notepad post.txt
+
+- to update the new object and cerify the change is saved
+resttester PUT http://localhost:8088/Badges/2 post.txt
+resttester GET http://localhost:8088/Badges/2
+
+- Remove the test records
+resttester DELETE http://localhost:8088/Badges/1
+resttester DELETE http://localhost:8088/Badges/2
+(Note: the No Content message is an indicator of success in a delete operation)
+
