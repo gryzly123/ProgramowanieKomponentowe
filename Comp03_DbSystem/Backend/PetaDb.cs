@@ -10,6 +10,9 @@ namespace Backend
     {
         [PetaPoco.Column("id")] public Int64 Id { get; set; }
         [PetaPoco.Column("username")] public String Username{ get; set; }
+
+        public static string sqlGet(Int64 id) => string.Format("SELECT * FROM Users WHERE id='{0}'", id);
+        public static string sqlGetAll()      => string.Format("SELECT * FROM Users");
     }
 
     [PetaPoco.TableName("Tasklists")]
