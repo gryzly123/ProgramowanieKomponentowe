@@ -1,15 +1,8 @@
 ﻿using Nancy;
-using Nancy.Extensions;
 using System;
 
 namespace Server
 {
-    public class Json
-    {
-        public static dynamic Parse(string Json) { return Newtonsoft.Json.JsonConvert.DeserializeObject(Json); }
-        public static dynamic Parse(Request Req) { return Newtonsoft.Json.JsonConvert.DeserializeObject(Req.Body.AsString()); }
-    }
-
     public class UserModule : NancyModule
     {
         public UserModule() : base("/User")
@@ -29,7 +22,7 @@ namespace Server
             {
                 return u;
             }
-            return new { error = "user_not_found" };
+            return new { error = ErrCode.NotFoundCode };
         }
 
         object GetAll()
@@ -45,34 +38,34 @@ namespace Server
 
             object retval = db.Insert("Users", "id", new { username = parameters["username"] });
             if(retval is long) return new { ok = retval };
-            return new { error = "internal_error" };
+            return new { error = ErrCode.InternalErrorCode };
         }
 
         object RemoveUser(int id)
         {
             PetaPoco.Database db = Backend.Sysdata.Get();
 
-            int retval = db.Delete("Users", "id", new { id = id });
-            return (retval == 1) ? null : new { error = "user_doesnt_exist" };
+            int retval = db.Delete("Users", "id", new { id });
+            return (retval == 1) ? null : new { error = ErrCode.NotFoundCode };
         }
 
         object UpdateUser(int id, dynamic parameters)
         {
             PetaPoco.Database db = Backend.Sysdata.Get();
-
             Backend.User u = null;
+
+            try { u = (Backend.User)GetById(id); }
+            catch(Exception e) { return new { error = ErrCode.NotFoundCode }; }
+
+
             try
             {
-                u = (Backend.User)GetById(id);
                 if (parameters["username"] != null) u.Username = parameters["username"].ToString();
             }
-            catch(Exception e)
-            {
-                return new { error = "user_doesnt_exist" };
-            }
+            catch(Exception e) { return new { error = "value_parse_error" }; }
 
             int retval = db.Update("Users", "id", u, u.Id);
-            return (retval == 1) ? null : new { error = "update_failed" };
+            return (retval == 1) ? null : new { error = ErrCode.UpdateFailed };
         }
     }
 }
