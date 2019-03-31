@@ -22,6 +22,9 @@ namespace Backend
         [PetaPoco.Column("id")] public Int64 Id { get; set; }
         [PetaPoco.Column("name")] public String Name { get; set; }
         [PetaPoco.Column("deadline")] public Int32 Deadline { get; set; }
+
+        public static string sqlGet(Int64 id) => string.Format("SELECT * FROM Tasklists WHERE id='{0}'", id);
+        public static string sqlGetAll() => string.Format("SELECT * FROM Tasklists");
     }
 
     [PetaPoco.TableName("Tasks")]
@@ -35,8 +38,12 @@ namespace Backend
         [PetaPoco.Column("status")] public Int32 Status { get; set; }
         [PetaPoco.Column("owner_tasklist")] public Int64 TasklistId { get; set; }
         [PetaPoco.Column("assignee_user")] public Int64 UserId { get; set; }
+
+        public static string sqlGet(Int64 id) => string.Format("SELECT * FROM Tasks WHERE id='{0}'", id);
+        public static string sqlGetAll() => string.Format("SELECT * FROM Tasks");
     }
 
+    //helper class for checking if user table exists before initializing db
     public partial class Table
     {
         [PetaPoco.Column("name")] public String Name { get; set; }

@@ -13,10 +13,11 @@ namespace Server
 
     public static class ErrCode
     {
-        public const string NotFoundCode = "not_found";
-        public const string InternalErrorCode = "internal_error";
-        public const string UpdateFailed = "update_failed";
-        public const string ParseError = "value_parse_error";
+        public const  string NotFoundCode = "not_found";
+        public const  string InternalErrorCode = "internal_error";
+        public const  string UpdateFailed = "update_failed";
+        public const  string ParseError = "value_parse_error";
+        public static string RequiredField(string f) => string.Format("{0}_field_required", f);
     }
 
     class Program
