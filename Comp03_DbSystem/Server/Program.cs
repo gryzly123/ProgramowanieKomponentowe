@@ -16,6 +16,7 @@ namespace Server
         public const string NotFoundCode = "not_found";
         public const string InternalErrorCode = "internal_error";
         public const string UpdateFailed = "update_failed";
+        public const string ParseError = "value_parse_error";
     }
 
     class Program

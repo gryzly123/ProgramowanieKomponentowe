@@ -62,7 +62,7 @@ namespace Server
             {
                 if (parameters["username"] != null) u.Username = parameters["username"].ToString();
             }
-            catch(Exception e) { return new { error = "value_parse_error" }; }
+            catch(Exception e) { return new { error = ErrCode.ParseError }; }
 
             int retval = db.Update("Users", "id", u, u.Id);
             return (retval == 1) ? null : new { error = ErrCode.UpdateFailed };
