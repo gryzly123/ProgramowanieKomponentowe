@@ -13,6 +13,8 @@ namespace Backend
 
         public static string sqlGet(Int64 id) => string.Format("SELECT * FROM Users WHERE id='{0}'", id);
         public static string sqlGetAll()      => string.Format("SELECT * FROM Users");
+
+        public override string ToString() { return string.Format("{0}: {1}", Id, Username);  }
     }
 
     [PetaPoco.TableName("Tasklists")]
@@ -25,6 +27,8 @@ namespace Backend
 
         public static string sqlGet(Int64 id) => string.Format("SELECT * FROM Tasklists WHERE id='{0}'", id);
         public static string sqlGetAll() => string.Format("SELECT * FROM Tasklists");
+
+        public override string ToString() { return string.Format("{0}: {1} (to be done before {2})", Id, Name, Sysdata.DateFromTimestamp(Deadline));  }
     }
 
     [PetaPoco.TableName("Tasks")]
@@ -41,6 +45,17 @@ namespace Backend
 
         public static string sqlGet(Int64 id) => string.Format("SELECT * FROM Tasks WHERE id='{0}'", id);
         public static string sqlGetAll() => string.Format("SELECT * FROM Tasks");
+
+        public override string ToString()
+        {
+            return string.Format("{0} [{1}]: {2} (to be done before {3} by user id {4}. In tasklist id {5}.)",
+                Id,
+                Status.Equals(1) ? "✓" : " ",
+                Name,
+                Sysdata.DateFromTimestamp(Deadline),
+                Owner_Tasklist,
+                Assignee_User);
+        }
     }
 
     //helper class for checking if user table exists before initializing db
@@ -121,6 +136,18 @@ namespace Backend
 
             db.Execute(sql);
 
+        }
+
+        public static DateTime DateFromTimestamp(int stamp)
+        {
+            DateTime unix_epoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            return unix_epoch.AddSeconds(stamp);
+        }
+
+        public static int TimpestampFromDate(DateTime date)
+        {
+            DateTime unix_epoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            return (date - unix_epoch).Seconds;
         }
     }
 }
