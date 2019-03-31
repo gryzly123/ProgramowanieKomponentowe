@@ -33,11 +33,11 @@ namespace Backend
     {
         [PetaPoco.Column("id")] public Int64 Id { get; set; }
         [PetaPoco.Column("name")] public String Name { get; set; }
-        [PetaPoco.Column("descripion")] public String Description { get; set; }
+        [PetaPoco.Column("description")] public String Description { get; set; }
         [PetaPoco.Column("deadline")] public Int32 Deadline { get; set; }
         [PetaPoco.Column("status")] public Int32 Status { get; set; }
-        [PetaPoco.Column("owner_tasklist")] public Int64 TasklistId { get; set; }
-        [PetaPoco.Column("assignee_user")] public Int64 UserId { get; set; }
+        [PetaPoco.Column("owner_tasklist")] public Int64 Owner_Tasklist { get; set; }
+        [PetaPoco.Column("assignee_user")] public Int64 Assignee_User { get; set; }
 
         public static string sqlGet(Int64 id) => string.Format("SELECT * FROM Tasks WHERE id='{0}'", id);
         public static string sqlGetAll() => string.Format("SELECT * FROM Tasks");
@@ -85,14 +85,14 @@ namespace Backend
                            (
                                id INTEGER  PRIMARY KEY NOT NULL,
                                name TEXT NOT NULL,
-                               deadline INTEGER NOT NULL DEFAULT CURRENT_TIMESTAMP
+                               deadline INTEGER NOT NULL DEFAULT (strftime('%s', 'now'))
                            );
                            CREATE TABLE Tasks
                            (
                                id INTEGER PRIMARY KEY NOT NULL,
                                name TEXT NOT NULL,
                                description TEXT NOT NULL,
-                               deadline INTEGER NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                               deadline INTEGER NOT NULL DEFAULT (strftime('%s', 'now')),
                                status INTEGER NOT NULL DEFAULT 0,
                                owner_tasklist INTEGER NOT NULL,
                                assignee_user INTEGER NOT NULL,
@@ -107,15 +107,15 @@ namespace Backend
                     ;
                     
                     INSERT INTO Tasklists(name, deadline) VALUES
-                        ('First tasklist', CURRENT_TIMESTAMP),
-                        ('Production tasklist', CURRENT_TIMESTAMP)
+                        ('First tasklist', (strftime('%s', 'now'))),
+                        ('Production tasklist', (strftime('%s', 'now')))
                     ;
                     
                     INSERT INTO Tasks(name, description, deadline, status, owner_tasklist, assignee_user) VALUES
-                        ('Research platform', 'Check this new tasklist software and learn its features', CURRENT_TIMESTAMP, 1, '1', '1'),
-                        ('Create user accounts', 'Not all users have accounts on the platform yet. Create the accounts and notify coworkers', CURRENT_TIMESTAMP, 0, '1', '2'),
-                        ('Run unit tests', 'Run the tests for final deploy', CURRENT_TIMESTAMP, 0, '2', '1'),
-                        ('Prepare for deployment', 'Deploy to production should happen as soon as the tests are complete', CURRENT_TIMESTAMP, 0, '2', '2')
+                        ('Research platform', 'Check this new tasklist software and learn its features', (strftime('%s', 'now')), 1, '1', '1'),
+                        ('Create user accounts', 'Not all users have accounts on the platform yet. Create the accounts and notify coworkers', (strftime('%s', 'now')), 0, '1', '2'),
+                        ('Run unit tests', 'Run the tests for final deploy', (strftime('%s', 'now')), 0, '2', '1'),
+                        ('Prepare for deployment', 'Deploy to production should happen as soon as the tests are complete', (strftime('%s', 'now')), 0, '2', '2')
                     ; ";
             #endif
 
