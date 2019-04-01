@@ -200,6 +200,7 @@
             this.btnCreateTask.TabIndex = 12;
             this.btnCreateTask.Text = "Create";
             this.btnCreateTask.UseVisualStyleBackColor = true;
+            this.btnCreateTask.Click += new System.EventHandler(this.AddTask);
             // 
             // btnEditTask
             // 
@@ -209,6 +210,7 @@
             this.btnEditTask.TabIndex = 11;
             this.btnEditTask.Text = "Edit";
             this.btnEditTask.UseVisualStyleBackColor = true;
+            this.btnEditTask.Click += new System.EventHandler(this.EditTask);
             // 
             // btnDeleteTask
             // 
@@ -218,6 +220,7 @@
             this.btnDeleteTask.TabIndex = 10;
             this.btnDeleteTask.Text = "Delete";
             this.btnDeleteTask.UseVisualStyleBackColor = true;
+            this.btnDeleteTask.Click += new System.EventHandler(this.DeleteTask);
             // 
             // lbTasks
             // 
@@ -226,6 +229,7 @@
             this.lbTasks.Name = "lbTasks";
             this.lbTasks.Size = new System.Drawing.Size(589, 355);
             this.lbTasks.TabIndex = 9;
+            this.lbTasks.DoubleClick += new System.EventHandler(this.EditTask);
             // 
             // Form1
             // 

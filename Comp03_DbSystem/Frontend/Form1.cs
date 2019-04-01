@@ -64,7 +64,7 @@ namespace Frontend
             lbTasklists.Items.Clear();
 
             if (Tasklists == null)
-                lbTasklists.Items.Add("User fetch failed. Is server running?");
+                lbTasklists.Items.Add("Tasklist fetch failed. Is server running?");
             else
                 foreach (Backend.Tasklist u in Tasklists)
             {
@@ -79,7 +79,7 @@ namespace Frontend
             lbTasks.Items.Clear();
 
             if (Tasks == null)
-                lbTasks.Items.Add("User fetch failed. Is server running?");
+                lbTasks.Items.Add("Task fetch failed. Is server running?");
             else
                 foreach (Backend.Task u in Tasks)
             {
@@ -165,6 +165,45 @@ namespace Frontend
             tf.ShowDialog();
 
             UpdateTasklistList();
+        }
+
+        private void AddTask(object sender, EventArgs e)
+        {
+            Backend.Task TargetTask = new Backend.Task();
+            TaskForm tf = new TaskForm(TargetTask, DataAction.AddNew, api);
+            tf.ShowDialog();
+
+            UpdateTaskList();
+        }
+
+        private void EditTask(object sender, EventArgs e)
+        {
+            if (lbTasks.SelectedIndex < 0)
+            {
+                NothingSelected();
+                return;
+            }
+
+            Backend.Task TargetTask = Tasks[lbTasks.SelectedIndex];
+            TaskForm tf = new TaskForm(TargetTask, DataAction.ReadAndModify, api);
+            tf.ShowDialog();
+
+            UpdateTaskList();
+        }
+
+        private void DeleteTask(object sender, EventArgs e)
+        {
+            if (lbTasks.SelectedIndex < 0)
+            {
+                NothingSelected();
+                return;
+            }
+
+            Backend.Task TargetTask = Tasks[lbTasks.SelectedIndex];
+            TaskForm tf = new TaskForm(TargetTask, DataAction.ConfirmDelete, api);
+            tf.ShowDialog();
+
+            UpdateTaskList();
         }
     }
 }

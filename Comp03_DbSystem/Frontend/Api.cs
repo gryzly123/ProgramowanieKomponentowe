@@ -125,6 +125,8 @@ namespace Frontend
             Error = ObjectArray["error"];
             return false;
         }
+
+
         public bool DeleteUser(User User, out string Error)
         {
             dynamic ObjectArray = Request(
@@ -264,6 +266,69 @@ namespace Frontend
                 Error = "invalid_response";
                 return null;
             }
+        }
+        public bool AddTask(Task Task, out string Error)
+        {
+            JObject req = new JObject();
+            req.Add("name", Task.Name);
+            req.Add("description", Task.Description);
+            req.Add("status", Task.Status);
+            req.Add("deadline", Task.Deadline);
+            req.Add("assignee_user", Task.Assignee_User);
+            req.Add("owner_tasklist", Task.Owner_Tasklist);
+
+            dynamic ObjectArray = Request(
+                string.Format("{0}/Task/add", Server),
+                "POST",
+                req.ToString());
+
+            if (ObjectArray["ok"] != null)
+            {
+                Error = "";
+                return true;
+            }
+            Error = ObjectArray["error"];
+            return false;
+        }
+        public bool UpdateTask(Task Task, out string Error)
+        {
+            JObject req = new JObject();
+            req.Add("name", Task.Name);
+            req.Add("description", Task.Description);
+            req.Add("status", Task.Status);
+            req.Add("deadline", Task.Deadline);
+            req.Add("assignee_user", Task.Assignee_User);
+            req.Add("owner_tasklist", Task.Owner_Tasklist);
+
+            dynamic ObjectArray = Request(
+                string.Format("{0}/Task/{1}", Server, Task.Id),
+                "PUT",
+                req.ToString());
+
+            if (ObjectArray == null) { Error = "no_response"; return false; }
+
+            if (ObjectArray["ok"] != null)
+            {
+                Error = "";
+                return true;
+            }
+            Error = ObjectArray["error"];
+            return false;
+        }
+        public bool DeleteTask(Task Task, out string Error)
+        {
+            dynamic ObjectArray = Request(
+                string.Format("{0}/Task/{1}", Server, Task.Id),
+                "DELETE",
+                "");
+
+            if (ObjectArray["ok"] != null)
+            {
+                Error = "";
+                return true;
+            }
+            Error = ObjectArray["error"];
+            return false;
         }
         #endregion
     }
