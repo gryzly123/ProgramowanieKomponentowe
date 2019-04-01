@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Text;
 
 namespace Frontend
 {
@@ -17,13 +18,25 @@ namespace Frontend
 
         public static dynamic Parse(string Json) { return Newtonsoft.Json.JsonConvert.DeserializeObject(Json); }
 
-        private dynamic Request(string Url, string Method)
+        private dynamic Request(string Url, string Method, string Body)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url);
             request.Accept = "application/json";
             request.Method = Method;
+            bool bIsGet = Method.ToUpper().Equals("GET");
+
             try
             {
+                if(!bIsGet)
+                {
+                    request.AllowWriteStreamBuffering = true;
+
+                    byte[] bytes = Encoding.UTF8.GetBytes(Body);
+                    request.ContentLength = bytes.Length;
+                    using (Stream requestStream = request.GetRequestStream())
+                        requestStream.Write(bytes, 0, bytes.Length);
+                }
+
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
                 Stream dataStream = response.GetResponseStream();
@@ -40,12 +53,12 @@ namespace Frontend
             }
         }
 
-
         public List<Backend.User> GetUsers(out string Error)
         {
             dynamic ObjectArray = Request(
                 string.Format("{0}/User/all", Server),
-                "GET");
+                "GET",
+                "");
 
             List<Backend.User> result = new List<Backend.User>();
 
@@ -61,11 +74,65 @@ namespace Frontend
             return result;
         }
 
+        public bool UpdateUser(Backend.User User, out string Error)
+        {
+            JObject req = new JObject();
+            req.Add("username", User.Username);
+
+            dynamic ObjectArray = Request(
+                string.Format("{0}/User/{1}", Server, User.Id),
+                "PUT",
+                req.ToString());
+
+            if (ObjectArray == null)
+            {
+                Error = "";
+                return true;
+            }
+            Error = ObjectArray["error"];
+            return false;
+        }
+
+        public bool AddUser(Backend.User User, out string Error)
+        {
+            JObject req = new JObject();
+            req.Add("username", User.Username);
+
+            dynamic ObjectArray = Request(
+                string.Format("{0}/User/add", Server),
+                "POST",
+                req.ToString());
+
+            if (ObjectArray["ok"] != null)
+            {
+                Error = "";
+                return true;
+            }
+            Error = ObjectArray["error"];
+            return false;
+        }
+        public bool DeleteUser(Backend.User User, out string Error)
+        {
+            dynamic ObjectArray = Request(
+                string.Format("{0}/User/{1}", Server, User.Id),
+                "DELETE",
+                "");
+
+            if (ObjectArray == null)
+            {
+                Error = "";
+                return true;
+            }
+            Error = ObjectArray["error"];
+            return false;
+        }
+
         public List<Backend.Tasklist> GetTasklists(out string Error)
         {
             dynamic ObjectArray = Request(
                 string.Format("{0}/Tasklist/all", Server),
-                "GET");
+                "GET",
+                "");
 
             List<Backend.Tasklist> result = new List<Backend.Tasklist>();
 
@@ -86,7 +153,8 @@ namespace Frontend
         {
             dynamic ObjectArray = Request(
                 string.Format("{0}/Task/all", Server),
-                "GET");
+                "GET",
+                "");
 
             List<Backend.Task> result = new List<Backend.Task>();
 
