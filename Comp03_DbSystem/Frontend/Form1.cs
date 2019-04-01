@@ -78,5 +78,45 @@ namespace Frontend
             }
         }
 
+        private void UpdateUser(object sender, EventArgs e)
+        {
+            if (lbUsers.SelectedIndex < 0)
+            {
+                NothingSelected();
+                return;
+            }
+
+            Backend.User TargetUser = Users[lbUsers.SelectedIndex];
+            UserForm uf = new UserForm(TargetUser, DataAction.ReadAndModify, api);
+            uf.ShowDialog();
+
+            UpdateUserList();
+        }
+
+        private void AddUser(object sender, EventArgs e)
+        {
+            Backend.User TargetUser = new Backend.User();
+            UserForm uf = new UserForm(TargetUser, DataAction.AddNew, api);
+            uf.ShowDialog();
+
+            UpdateUserList();
+        }
+
+        private void DeleteUser(object sender, EventArgs e)
+        {
+            if (lbUsers.SelectedIndex < 0)
+            {
+                NothingSelected();
+                return;
+            }
+
+            Backend.User TargetUser = Users[lbUsers.SelectedIndex];
+            UserForm uf = new UserForm(TargetUser, DataAction.ConfirmDelete, api);
+            uf.ShowDialog();
+
+            UpdateUserList();
+        }
+
+        private void NothingSelected() { MessageBox.Show("Nothing selected!"); }
     }
 }

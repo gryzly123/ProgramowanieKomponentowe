@@ -96,6 +96,7 @@
             this.btnAddUser.TabIndex = 4;
             this.btnAddUser.Text = "Create";
             this.btnAddUser.UseVisualStyleBackColor = true;
+            this.btnAddUser.Click += new System.EventHandler(this.AddUser);
             // 
             // btnEditUser
             // 
@@ -105,6 +106,7 @@
             this.btnEditUser.TabIndex = 3;
             this.btnEditUser.Text = "Edit";
             this.btnEditUser.UseVisualStyleBackColor = true;
+            this.btnEditUser.Click += new System.EventHandler(this.UpdateUser);
             // 
             // btnDeleteUser
             // 
@@ -114,6 +116,7 @@
             this.btnDeleteUser.TabIndex = 2;
             this.btnDeleteUser.Text = "Delete";
             this.btnDeleteUser.UseVisualStyleBackColor = true;
+            this.btnDeleteUser.Click += new System.EventHandler(this.DeleteUser);
             // 
             // lbUsers
             // 
@@ -122,6 +125,7 @@
             this.lbUsers.Name = "lbUsers";
             this.lbUsers.Size = new System.Drawing.Size(589, 355);
             this.lbUsers.TabIndex = 0;
+            this.lbUsers.DoubleClick += new System.EventHandler(this.UpdateUser);
             // 
             // tabPage3
             // 
