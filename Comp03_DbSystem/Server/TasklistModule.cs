@@ -49,7 +49,7 @@ namespace Server
             {
                 if (parameters["deadline"] != null) tasklist.deadline = (Int32)parameters["deadline"];
             }
-            catch(Exception e) { return new { error = ErrCode.ParseError}; }
+            catch(Exception) { return new { error = ErrCode.ParseError}; }
 
             object retval = db.Insert("Tasklists", "id", tasklist);
             if (retval is long) return new { ok = retval };
@@ -61,7 +61,8 @@ namespace Server
             PetaPoco.Database db = Backend.Sysdata.Get();
 
             int retval = db.Delete("Tasklists", "id", new { id });
-            return (retval == 1) ? null : new { error = ErrCode.NotFoundCode };
+            if (retval == 1) return new { ok = id };
+            return new { error = ErrCode.NotFoundCode };
         }
 
         object UpdateTasklist(int id, dynamic parameters)
@@ -70,17 +71,18 @@ namespace Server
             Backend.Tasklist t = null;
 
             try { t = (Backend.Tasklist)GetById(id); }
-            catch (Exception e) { return new { error = ErrCode.NotFoundCode }; }
+            catch (Exception) { return new { error = ErrCode.NotFoundCode }; }
 
             try
             {
                 if (parameters["name"]     != null) t.Name     = parameters["name"].ToString();
                 if (parameters["deadline"] != null) t.Deadline = (Int32)parameters["deadline"];
             }
-            catch (Exception e) { return new { error = ErrCode.ParseError }; }
+            catch (Exception) { return new { error = ErrCode.ParseError }; }
 
             int retval = db.Update("Tasklists", "id", t, t.Id);
-            return (retval == 1) ? null : new { error = ErrCode.UpdateFailed };
+            if (retval == 1) return new { ok = id };
+            return new { error = ErrCode.UpdateFailed };
         }
     }
 }

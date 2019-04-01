@@ -46,7 +46,8 @@ namespace Server
             PetaPoco.Database db = Backend.Sysdata.Get();
 
             int retval = db.Delete("Users", "id", new { id });
-            return (retval == 1) ? null : new { error = ErrCode.NotFoundCode };
+            if (retval == 1) return new { ok = id };
+            return new { error = ErrCode.NotFoundCode };
         }
 
         object UpdateUser(int id, dynamic parameters)
@@ -55,17 +56,18 @@ namespace Server
             Backend.User u = null;
 
             try { u = (Backend.User)GetById(id); }
-            catch(Exception e) { return new { error = ErrCode.NotFoundCode }; }
+            catch(Exception) { return new { error = ErrCode.NotFoundCode }; }
 
 
             try
             {
                 if (parameters["username"] != null) u.Username = parameters["username"].ToString();
             }
-            catch(Exception e) { return new { error = ErrCode.ParseError }; }
+            catch(Exception) { return new { error = ErrCode.ParseError }; }
 
             int retval = db.Update("Users", "id", u, u.Id);
-            return (retval == 1) ? null : new { error = ErrCode.UpdateFailed };
+            if (retval == 1) return new { ok = id };
+             return new { error = ErrCode.UpdateFailed };
         }
     }
 }
