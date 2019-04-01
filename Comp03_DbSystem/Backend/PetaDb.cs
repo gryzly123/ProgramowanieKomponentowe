@@ -147,7 +147,7 @@ namespace Backend
         public static int TimpestampFromDate(DateTime date)
         {
             DateTime unix_epoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-            return (date - unix_epoch).Seconds;
+            return (int)(date - unix_epoch).TotalSeconds;
         }
     }
 }
