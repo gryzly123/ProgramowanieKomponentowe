@@ -148,6 +148,7 @@
             this.btnAddTasklist.TabIndex = 8;
             this.btnAddTasklist.Text = "Create";
             this.btnAddTasklist.UseVisualStyleBackColor = true;
+            this.btnAddTasklist.Click += new System.EventHandler(this.AddTasklist);
             // 
             // btnEditTasklist
             // 
@@ -157,6 +158,7 @@
             this.btnEditTasklist.TabIndex = 7;
             this.btnEditTasklist.Text = "Edit";
             this.btnEditTasklist.UseVisualStyleBackColor = true;
+            this.btnEditTasklist.Click += new System.EventHandler(this.EditTasklist);
             // 
             // btnDeleteTasklist
             // 
@@ -166,6 +168,7 @@
             this.btnDeleteTasklist.TabIndex = 6;
             this.btnDeleteTasklist.Text = "Delete";
             this.btnDeleteTasklist.UseVisualStyleBackColor = true;
+            this.btnDeleteTasklist.Click += new System.EventHandler(this.DeleteTasklist);
             // 
             // lbTasklists
             // 
@@ -174,6 +177,7 @@
             this.lbTasklists.Name = "lbTasklists";
             this.lbTasklists.Size = new System.Drawing.Size(589, 355);
             this.lbTasklists.TabIndex = 5;
+            this.lbTasklists.DoubleClick += new System.EventHandler(this.EditTasklist);
             // 
             // tabPage4
             // 

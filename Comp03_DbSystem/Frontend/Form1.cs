@@ -47,32 +47,41 @@ namespace Frontend
             Users = api.GetUsers(out err);
             lbUsers.Items.Clear();
 
-            foreach(Backend.User u in Users)
+            if(Users == null)
+                lbUsers.Items.Add("User fetch failed. Is server running?");
+            else
+                foreach (Backend.User u in Users)
             {
                 lbUsers.Items.Add(u.ToString());
             }
 
         }
 
-        private void UpdateTaskList()
+        private void UpdateTasklistList()
         {
             string err;
             Tasklists = api.GetTasklists(out err);
             lbTasklists.Items.Clear();
 
-            foreach (Backend.Tasklist u in Tasklists)
+            if (Tasklists == null)
+                lbTasklists.Items.Add("User fetch failed. Is server running?");
+            else
+                foreach (Backend.Tasklist u in Tasklists)
             {
                 lbTasklists.Items.Add(u.ToString());
             }
         }
 
-        private void UpdateTasklistList()
+        private void UpdateTaskList()
         {
             string err;
             Tasks = api.GetTasks(out err);
             lbTasks.Items.Clear();
 
-            foreach (Backend.Task u in Tasks)
+            if (Tasks == null)
+                lbTasks.Items.Add("User fetch failed. Is server running?");
+            else
+                foreach (Backend.Task u in Tasks)
             {
                 lbTasks.Items.Add(u.ToString());
             }
@@ -118,5 +127,44 @@ namespace Frontend
         }
 
         private void NothingSelected() { MessageBox.Show("Nothing selected!"); }
+
+        private void AddTasklist(object sender, EventArgs e)
+        {
+            Backend.Tasklist TargetTasklist = new Backend.Tasklist();
+            TasklistForm tf = new TasklistForm(TargetTasklist, DataAction.AddNew, api);
+            tf.ShowDialog();
+
+            UpdateTasklistList();
+        }
+
+        private void EditTasklist(object sender, EventArgs e)
+        {
+            if (lbTasklists.SelectedIndex < 0)
+            {
+                NothingSelected();
+                return;
+            }
+
+            Backend.Tasklist TargetTasklist = Tasklists[lbTasklists.SelectedIndex];
+            TasklistForm tf = new TasklistForm(TargetTasklist, DataAction.ReadAndModify, api);
+            tf.ShowDialog();
+
+            UpdateTasklistList();
+        }
+
+        private void DeleteTasklist(object sender, EventArgs e)
+        {
+            if (lbTasklists.SelectedIndex < 0)
+            {
+                NothingSelected();
+                return;
+            }
+
+            Backend.Tasklist TargetTasklist = Tasklists[lbTasklists.SelectedIndex];
+            TasklistForm tf = new TasklistForm(TargetTasklist, DataAction.ConfirmDelete, api);
+            tf.ShowDialog();
+
+            UpdateTasklistList();
+        }
     }
 }

@@ -37,7 +37,10 @@ namespace Frontend
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            User.Username = tbUsername.Text;
+            if (df.FieldAccess)
+            {
+                User.Username = tbUsername.Text;
+            }
 
             string Error;
             switch(df.da)

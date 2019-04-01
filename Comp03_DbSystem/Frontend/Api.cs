@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Backend;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -47,34 +48,63 @@ namespace Frontend
                 response.Close();
                 return Parse(ResponseBody);
             }
-            catch (System.Net.WebException e)
+            catch (System.Net.WebException)
             {
                 return null;
             }
         }
 
-        public List<Backend.User> GetUsers(out string Error)
+        #region User
+        public List<User> GetUsers(out string Error)
         {
             dynamic ObjectArray = Request(
                 string.Format("{0}/User/all", Server),
                 "GET",
                 "");
 
-            List<Backend.User> result = new List<Backend.User>();
+            if (ObjectArray == null) { Error = "no_response"; return null; }
 
-            foreach (JObject o in ObjectArray)
+            List<User> result = new List<User>();
+            try
             {
-                Backend.User u = new Backend.User();
-                u.Id = Int32.Parse(o.GetValue("id").ToString());
-                u.Username = o.GetValue("username").ToString();
-                result.Add(u);
+                foreach (JObject o in ObjectArray)
+                {
+                    User u = new User();
+                    u.Id = Int32.Parse(o.GetValue("id").ToString());
+                    u.Username = o.GetValue("username").ToString();
+                    result.Add(u);
+                }
+
+                Error = "";
+                return result;
             }
-
-            Error = "not implemented";
-            return result;
+            catch (Exception)
+            {
+                Error = "invalid_response";
+                return null;
+            }
         }
+        public bool AddUser(User User, out string Error)
+        {
+            JObject req = new JObject();
+            req.Add("username", User.Username);
 
-        public bool UpdateUser(Backend.User User, out string Error)
+            dynamic ObjectArray = Request(
+                string.Format("{0}/User/add", Server),
+                "POST",
+                req.ToString());
+
+            if (ObjectArray == null) { Error = "no_response"; return false; }
+
+            if (ObjectArray["ok"] != null)
+            {
+                Error = "";
+                return true;
+            }
+            Error = ObjectArray["error"];
+            return false;
+        }
+        public bool UpdateUser(User User, out string Error)
         {
             JObject req = new JObject();
             req.Add("username", User.Username);
@@ -84,7 +114,10 @@ namespace Frontend
                 "PUT",
                 req.ToString());
 
-            if (ObjectArray == null)
+
+            if (ObjectArray == null) { Error = "no_response"; return false; }
+
+            if (ObjectArray["ok"] != null)
             {
                 Error = "";
                 return true;
@@ -92,14 +125,62 @@ namespace Frontend
             Error = ObjectArray["error"];
             return false;
         }
+        public bool DeleteUser(User User, out string Error)
+        {
+            dynamic ObjectArray = Request(
+                string.Format("{0}/User/{1}", Server, User.Id),
+                "DELETE",
+                "");
 
-        public bool AddUser(Backend.User User, out string Error)
+            if (ObjectArray["ok"] != null)
+            {
+                Error = "";
+                return true;
+            }
+            Error = ObjectArray["error"];
+            return false;
+        }
+        #endregion
+
+        #region Tasklist
+        public List<Tasklist> GetTasklists(out string Error)
+        {
+            dynamic ObjectArray = Request(
+                string.Format("{0}/Tasklist/all", Server),
+                "GET",
+                "");
+
+            if (ObjectArray == null) { Error = "no_response"; return null; }
+
+            try
+            {
+                List<Tasklist> result = new List<Tasklist>();
+                foreach (JObject o in ObjectArray)
+                {
+                    Tasklist t = new Tasklist();
+                    t.Id = Int32.Parse(o.GetValue("id").ToString());
+                    t.Name = o.GetValue("name").ToString();
+                    t.Deadline = Int32.Parse(o.GetValue("deadline").ToString());
+                    result.Add(t);
+                }
+
+                Error = "";
+                return result;
+            }
+            catch (Exception)
+            {
+                Error = "invalid_response";
+                return null;
+            }
+        }
+        public bool AddTasklist(Tasklist Tasklist, out string Error)
         {
             JObject req = new JObject();
-            req.Add("username", User.Username);
+            req.Add("name", Tasklist.Name);
+            req.Add("deadline", Tasklist.Deadline);
 
             dynamic ObjectArray = Request(
-                string.Format("{0}/User/add", Server),
+                string.Format("{0}/Tasklist/add", Server),
                 "POST",
                 req.ToString());
 
@@ -111,14 +192,20 @@ namespace Frontend
             Error = ObjectArray["error"];
             return false;
         }
-        public bool DeleteUser(Backend.User User, out string Error)
+        public bool UpdateTasklist(Tasklist Tasklist, out string Error)
         {
-            dynamic ObjectArray = Request(
-                string.Format("{0}/User/{1}", Server, User.Id),
-                "DELETE",
-                "");
+            JObject req = new JObject();
+            req.Add("name", Tasklist.Name);
+            req.Add("deadline", Tasklist.Deadline);
 
-            if (ObjectArray == null)
+            dynamic ObjectArray = Request(
+                string.Format("{0}/Tasklist/{1}", Server, Tasklist.Id),
+                "PUT",
+                req.ToString());
+
+            if (ObjectArray == null) { Error = "no_response"; return false; }
+
+            if (ObjectArray["ok"] != null)
             {
                 Error = "";
                 return true;
@@ -126,53 +213,58 @@ namespace Frontend
             Error = ObjectArray["error"];
             return false;
         }
-
-        public List<Backend.Tasklist> GetTasklists(out string Error)
+        public bool DeleteTasklist(Tasklist Tasklist, out string Error)
         {
             dynamic ObjectArray = Request(
-                string.Format("{0}/Tasklist/all", Server),
-                "GET",
+                string.Format("{0}/Tasklist/{1}", Server, Tasklist.Id),
+                "DELETE",
                 "");
 
-            List<Backend.Tasklist> result = new List<Backend.Tasklist>();
-
-            foreach (JObject o in ObjectArray)
+            if (ObjectArray["ok"] != null)
             {
-                Backend.Tasklist t = new Backend.Tasklist();
-                t.Id = Int32.Parse(o.GetValue("id").ToString());
-                t.Name = o.GetValue("name").ToString();
-                t.Deadline = Int32.Parse(o.GetValue("deadline").ToString());
-                result.Add(t);
+                Error = "";
+                return true;
             }
-
-            Error = "not implemented";
-            return result;
+            Error = ObjectArray["error"];
+            return false;
         }
-
-        public List<Backend.Task> GetTasks(out string Error)
+        #endregion
+        
+        #region Task
+        public List<Task> GetTasks(out string Error)
         {
             dynamic ObjectArray = Request(
                 string.Format("{0}/Task/all", Server),
                 "GET",
                 "");
 
-            List<Backend.Task> result = new List<Backend.Task>();
+            if (ObjectArray == null) { Error = "no_response"; return null; }
 
-            foreach (JObject o in ObjectArray)
+            try
             {
-                Backend.Task t = new Backend.Task();
-                t.Id = Int32.Parse(o.GetValue("id").ToString());
-                t.Name = o.GetValue("name").ToString();
-                t.Description = o.GetValue("description").ToString();
-                t.Deadline = Int32.Parse(o.GetValue("deadline").ToString());
-                t.Status = Int32.Parse(o.GetValue("status").ToString());
-                t.Owner_Tasklist = Int32.Parse(o.GetValue("owner_Tasklist").ToString());
-                t.Assignee_User = Int32.Parse(o.GetValue("assignee_User").ToString());
-                result.Add(t);
-            }
+                List<Task> result = new List<Task>();
+                foreach (JObject o in ObjectArray)
+                {
+                    Task t = new Task();
+                    t.Id = Int32.Parse(o.GetValue("id").ToString());
+                    t.Name = o.GetValue("name").ToString();
+                    t.Description = o.GetValue("description").ToString();
+                    t.Deadline = Int32.Parse(o.GetValue("deadline").ToString());
+                    t.Status = Int32.Parse(o.GetValue("status").ToString());
+                    t.Owner_Tasklist = Int32.Parse(o.GetValue("owner_Tasklist").ToString());
+                    t.Assignee_User = Int32.Parse(o.GetValue("assignee_User").ToString());
+                    result.Add(t);
+                }
 
-            Error = "not implemented";
-            return result;
+                Error = "";
+                return result;
+            }
+            catch (Exception)
+            {
+                Error = "invalid_response";
+                return null;
+            }
         }
+        #endregion
     }
 }
