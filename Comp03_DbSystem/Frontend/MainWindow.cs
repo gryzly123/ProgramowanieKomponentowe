@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,14 +11,15 @@ using System.Windows.Forms;
 
 namespace Frontend
 {
-    public partial class Form1 : Form
+    public partial class MainWindow : Form
     {
         Api api;
 
-        public Form1()
+        public MainWindow()
         {
             InitializeComponent();
             api = new Api("http://localhost:31415");
+            UpdateSummary();
         }
 
         private void tvApp_SelectedIndexChanged(object sender, EventArgs e)
@@ -31,14 +33,67 @@ namespace Frontend
             }
         }
 
+        List<Backend.User> SummaryUsers;
         List<Backend.User> Users;
         List<Backend.Tasklist> Tasklists;
         List<Backend.Task> Tasks;
 
         private void UpdateSummary()
         {
-            //todo
-            throw new NotImplementedException();
+            cbSelectUserSummary.Items.Clear();
+
+            //update combo box with users
+            string err;
+            SummaryUsers = api.GetUsers(out err);
+
+            if (SummaryUsers == null)
+                cbSelectUserSummary.Items.Add("fetch failed");
+            else
+                foreach (Backend.User u in SummaryUsers)
+                {
+                    cbSelectUserSummary.Items.Add(u.ToString());
+                }
+            if(cbSelectUserSummary.Items.Count == 0)
+            {
+                cbSelectUserSummary.Items.Add("no users found");
+                return;
+            }
+            cbSelectUserSummary.SelectedIndex = 0; //UpdateSummaryRtb() gets called automatically through index changed event
+        }
+
+        void UpdateSummaryRtb()
+        {
+            rtbUserSummary.Clear();
+            string err;
+
+            if (SummaryUsers == null)
+            {
+                rtbUserSummary.AppendText("User fetch failed. Is server running?");
+                return;
+            }
+
+            Backend.User ParsedUser = SummaryUsers[cbSelectUserSummary.SelectedIndex];
+            JObject Summary = api.GetUserSummary(ParsedUser, out err);
+            if (Summary == null)
+            {
+                rtbUserSummary.AppendText("Summary fetch failed. Is server running?");
+                return;
+            }
+
+            rtbUserSummary.AppendText(string.Format("Showing summary for user {0}:\n\n", ParsedUser.Username));
+            foreach(JObject a in Summary.GetValue("tasklists"))
+            {
+                rtbUserSummary.AppendText(string.Format("\tIn tasklist {0} (deadline on {1}):\n", a.GetValue("name"), Backend.Sysdata.DateFromTimestamp((int)a.GetValue("deadline")).ToString()));
+                foreach (JObject b in a.GetValue("tasks"))
+                    rtbUserSummary.AppendText(string.Format(
+                        "\t\t{0} {1} (deadline on {2}):\n\t\t\t{3}\n\n",
+                        (b.GetValue("status").ToString().Equals("1") ? "☑" : "☐"),
+                        b.GetValue("name"),
+                        Backend.Sysdata.DateFromTimestamp((int)b.GetValue("deadline")).ToString(),
+                        b.GetValue("description")));
+
+                rtbUserSummary.AppendText("\n");
+            }
         }
 
         private void UpdateUserList()
@@ -204,6 +259,11 @@ namespace Frontend
             tf.ShowDialog();
 
             UpdateTaskList();
+        }
+
+        private void cbSelectUserSummary_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateSummaryRtb();
         }
     }
 }

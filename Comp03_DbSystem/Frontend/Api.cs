@@ -84,6 +84,17 @@ namespace Frontend
                 return null;
             }
         }
+        public JObject GetUserSummary(User User, out string Error)
+        {
+            dynamic ObjectArray = Request(
+                string.Format("{0}/User/{1}/summary", Server, User.Id),
+                "GET",
+                "");
+
+            if (ObjectArray == null) { Error = "no_response"; return null; }
+            Error = "";
+            return ObjectArray;
+        }
         public bool AddUser(User User, out string Error)
         {
             JObject req = new JObject();
@@ -125,8 +136,6 @@ namespace Frontend
             Error = ObjectArray["error"];
             return false;
         }
-
-
         public bool DeleteUser(User User, out string Error)
         {
             dynamic ObjectArray = Request(

@@ -48,9 +48,9 @@ namespace Backend
 
         public override string ToString()
         {
-            return string.Format("{0} [{1}]: {2} (to be done before {3} by user id {4}. In tasklist id {5}.)",
+            return string.Format("{0} {1} {2} (to be done before {3} by user id {4}. In tasklist id {5}.)",
                 Id,
-                Status.Equals(1) ? "✓" : " ",
+                Status.Equals(1) ? "☑" : "☐",
                 Name,
                 Sysdata.DateFromTimestamp(Deadline),
                 Owner_Tasklist,

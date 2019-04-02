@@ -1,6 +1,6 @@
 ﻿namespace Frontend
 {
-    partial class Form1
+    partial class MainWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -45,7 +45,11 @@
             this.btnEditTask = new System.Windows.Forms.Button();
             this.btnDeleteTask = new System.Windows.Forms.Button();
             this.lbTasks = new System.Windows.Forms.ListBox();
+            this.rtbUserSummary = new System.Windows.Forms.RichTextBox();
+            this.cbSelectUserSummary = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.tvApp.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -66,6 +70,9 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Controls.Add(this.cbSelectUserSummary);
+            this.tabPage1.Controls.Add(this.rtbUserSummary);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -231,15 +238,45 @@
             this.lbTasks.TabIndex = 9;
             this.lbTasks.DoubleClick += new System.EventHandler(this.EditTask);
             // 
-            // Form1
+            // rtbUserSummary
+            // 
+            this.rtbUserSummary.Location = new System.Drawing.Point(6, 37);
+            this.rtbUserSummary.Name = "rtbUserSummary";
+            this.rtbUserSummary.ReadOnly = true;
+            this.rtbUserSummary.Size = new System.Drawing.Size(589, 357);
+            this.rtbUserSummary.TabIndex = 0;
+            this.rtbUserSummary.Text = "";
+            // 
+            // cbSelectUserSummary
+            // 
+            this.cbSelectUserSummary.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSelectUserSummary.FormattingEnabled = true;
+            this.cbSelectUserSummary.Location = new System.Drawing.Point(131, 7);
+            this.cbSelectUserSummary.Name = "cbSelectUserSummary";
+            this.cbSelectUserSummary.Size = new System.Drawing.Size(189, 21);
+            this.cbSelectUserSummary.TabIndex = 1;
+            this.cbSelectUserSummary.SelectedIndexChanged += new System.EventHandler(this.cbSelectUserSummary_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 10);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(119, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Show summary for user:";
+            // 
+            // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(631, 450);
             this.Controls.Add(this.tvApp);
-            this.Name = "Form1";
+            this.Name = "MainWindow";
             this.Text = "Networked Tasklist (K. Niedzwiecki)";
             this.tvApp.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
@@ -266,6 +303,9 @@
         private System.Windows.Forms.Button btnEditTask;
         private System.Windows.Forms.Button btnDeleteTask;
         private System.Windows.Forms.ListBox lbTasks;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cbSelectUserSummary;
+        private System.Windows.Forms.RichTextBox rtbUserSummary;
     }
 }
 
