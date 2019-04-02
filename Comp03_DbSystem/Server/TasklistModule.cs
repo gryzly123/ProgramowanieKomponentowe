@@ -1,5 +1,6 @@
 ﻿using Nancy;
 using System;
+using System.Collections.Generic;
 using System.Dynamic;
 
 namespace Server
@@ -15,7 +16,7 @@ namespace Server
             Post["/add"] = parameter => { return AddTasklist(Json.Parse(Request)); };
         }
 
-        object GetById(int id)
+        internal static object GetById(int id)
         {
             PetaPoco.Database db = Backend.Sysdata.Get();
 
@@ -26,14 +27,14 @@ namespace Server
             return new { error = ErrCode.NotFoundCode };
         }
 
-        object GetAll()
+        internal static object GetAll()
         {
             PetaPoco.Database db = Backend.Sysdata.Get();
 
             return db.Query<Backend.Tasklist>(Backend.Tasklist.sqlGetAll());
         }
 
-        object AddTasklist(dynamic parameters)
+        internal static object AddTasklist(dynamic parameters)
         {
             PetaPoco.Database db = Backend.Sysdata.Get();
 
@@ -56,16 +57,22 @@ namespace Server
             return new { error = ErrCode.InternalErrorCode };
         }
 
-        object RemoveTasklist(int id)
+        internal static object RemoveTasklist(int id)
         {
             PetaPoco.Database db = Backend.Sysdata.Get();
+
+            foreach (Backend.Task t in (IEnumerable<Backend.Task>)TaskModule.GetAll())
+            {
+                if (t.Owner_Tasklist == id)
+                    return new { error = ErrCode.DependenciesExist };
+            }
 
             int retval = db.Delete("Tasklists", "id", new { id });
             if (retval == 1) return new { ok = id };
             return new { error = ErrCode.NotFoundCode };
         }
 
-        object UpdateTasklist(int id, dynamic parameters)
+        internal static object UpdateTasklist(int id, dynamic parameters)
         {
             PetaPoco.Database db = Backend.Sysdata.Get();
             Backend.Tasklist t = null;

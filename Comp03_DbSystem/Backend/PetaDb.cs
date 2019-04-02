@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Data.Common;
-using System.IO;
 
 namespace Backend
 {
@@ -53,8 +51,8 @@ namespace Backend
                 Status.Equals(1) ? "☑" : "☐",
                 Name,
                 Sysdata.DateFromTimestamp(Deadline),
-                Owner_Tasklist,
-                Assignee_User);
+                Assignee_User,
+                Owner_Tasklist);
         }
     }
 
@@ -77,7 +75,7 @@ namespace Backend
             db = new PetaPoco.Database(
                 String.Format("Data Source={0}", Filename),
                 new System.Data.SQLite.SQLiteFactory());
-
+            
             InitializeDb();
 
             return db;
@@ -85,9 +83,11 @@ namespace Backend
 
         private static void InitializeDb()
         {
+            db.Execute("PRAGMA foreign_keys = ON;");
+
             foreach(Table t in db.Query<Table>("SELECT name FROM sqlite_master WHERE type='table' AND name='Users'"))
             {
-                //we went inside the loop, meaning that the table exists
+                //we went inside the loop, meaning that the table exists. no need to init
                 return;
             }
 
@@ -111,8 +111,8 @@ namespace Backend
                                status INTEGER NOT NULL DEFAULT 0,
                                owner_tasklist INTEGER NOT NULL,
                                assignee_user INTEGER NOT NULL,
-                               FOREIGN KEY(owner_tasklist) REFERENCES Tasklists(id),
-                               FOREIGN KEY(owner_tasklist) REFERENCES Users(id)
+                               FOREIGN KEY(owner_tasklist) REFERENCES Tasklists(id) ON DELETE CASCADE,
+                               FOREIGN KEY(assignee_user) REFERENCES Users(id) ON DELETE CASCADE
                            );";
 
             #if DEBUG

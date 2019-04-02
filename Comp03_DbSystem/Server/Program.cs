@@ -17,6 +17,7 @@ namespace Server
         public const  string InternalErrorCode = "internal_error";
         public const  string UpdateFailed = "update_failed";
         public const  string ParseError = "value_parse_error";
+        public const  string DependenciesExist = "dependencies_lock";
         public static string RequiredField(string f) => string.Format("{0}_field_required", f);
     }
 

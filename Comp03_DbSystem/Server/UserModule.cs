@@ -17,7 +17,7 @@ namespace Server
             Post["/add"] = parameter => { return AddUser(Json.Parse(Request)); };
         }
 
-        object GetById(int id)
+        internal static object GetById(int id)
         {
             PetaPoco.Database db = Backend.Sysdata.Get();
 
@@ -28,7 +28,7 @@ namespace Server
             return new { error = ErrCode.NotFoundCode };
         }
 
-        object GetSummary(int id)
+        internal static object GetSummary(int id)
         {
             JObject user = new JObject();
             PetaPoco.Database db = Backend.Sysdata.Get();
@@ -84,14 +84,14 @@ namespace Server
             return user.ToString();
         }
 
-        object GetAll()
+        internal static object GetAll()
         {
             PetaPoco.Database db = Backend.Sysdata.Get();
 
             return db.Query<Backend.User>(Backend.User.sqlGetAll());
         }
 
-        object AddUser(dynamic parameters)
+        internal static object AddUser(dynamic parameters)
         {
             PetaPoco.Database db = Backend.Sysdata.Get();
 
@@ -100,16 +100,22 @@ namespace Server
             return new { error = ErrCode.InternalErrorCode };
         }
 
-        object RemoveUser(int id)
+        internal static object RemoveUser(int id)
         {
             PetaPoco.Database db = Backend.Sysdata.Get();
+
+            foreach(Backend.Task t in (IEnumerable<Backend.Task>)TaskModule.GetAll())
+            {
+                if (t.Assignee_User == id)
+                    return new { error = ErrCode.DependenciesExist };
+            }
 
             int retval = db.Delete("Users", "id", new { id });
             if (retval == 1) return new { ok = id };
             return new { error = ErrCode.NotFoundCode };
         }
 
-        object UpdateUser(int id, dynamic parameters)
+        internal static object UpdateUser(int id, dynamic parameters)
         {
             PetaPoco.Database db = Backend.Sysdata.Get();
             Backend.User u = null;

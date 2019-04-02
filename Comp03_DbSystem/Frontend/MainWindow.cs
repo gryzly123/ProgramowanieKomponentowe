@@ -1,12 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Frontend
@@ -68,7 +62,7 @@ namespace Frontend
 
             if (SummaryUsers == null)
             {
-                rtbUserSummary.AppendText("User fetch failed. Is server running?");
+                rtbUserSummary.AppendText("User fetch failed. Is the server running?");
                 return;
             }
 
@@ -76,7 +70,7 @@ namespace Frontend
             JObject Summary = api.GetUserSummary(ParsedUser, out err);
             if (Summary == null)
             {
-                rtbUserSummary.AppendText("Summary fetch failed. Is server running?");
+                rtbUserSummary.AppendText("Summary fetch failed. Is the server running?");
                 return;
             }
 
@@ -103,7 +97,7 @@ namespace Frontend
             lbUsers.Items.Clear();
 
             if(Users == null)
-                lbUsers.Items.Add("User fetch failed. Is server running?");
+                lbUsers.Items.Add("User fetch failed. Is the server running?");
             else
                 foreach (Backend.User u in Users)
             {
@@ -119,7 +113,7 @@ namespace Frontend
             lbTasklists.Items.Clear();
 
             if (Tasklists == null)
-                lbTasklists.Items.Add("Tasklist fetch failed. Is server running?");
+                lbTasklists.Items.Add("Tasklist fetch failed. Is the server running?");
             else
                 foreach (Backend.Tasklist u in Tasklists)
             {
@@ -134,7 +128,7 @@ namespace Frontend
             lbTasks.Items.Clear();
 
             if (Tasks == null)
-                lbTasks.Items.Add("Task fetch failed. Is server running?");
+                lbTasks.Items.Add("Task fetch failed. Is the server running?");
             else
                 foreach (Backend.Task u in Tasks)
             {

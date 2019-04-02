@@ -15,7 +15,7 @@ namespace Server
             Post["/add"] = parameter => { return AddTask(Json.Parse(Request)); };
         }
 
-        object GetById(int id)
+        internal static object GetById(int id)
         {
             PetaPoco.Database db = Backend.Sysdata.Get();
 
@@ -26,14 +26,14 @@ namespace Server
             return new { error = ErrCode.NotFoundCode };
         }
 
-        object GetAll()
+        internal static object GetAll()
         {
             PetaPoco.Database db = Backend.Sysdata.Get();
 
             return db.Query<Backend.Task>(Backend.Task.sqlGetAll());
         }
 
-        object AddTask(dynamic parameters)
+        internal static object AddTask(dynamic parameters)
         {
             PetaPoco.Database db = Backend.Sysdata.Get();
 
@@ -66,7 +66,7 @@ namespace Server
             return new { error = ErrCode.InternalErrorCode };
         }
 
-        object RemoveTask(int id)
+        internal static object RemoveTask(int id)
         {
             PetaPoco.Database db = Backend.Sysdata.Get();
 
@@ -75,7 +75,7 @@ namespace Server
             return new { error = ErrCode.NotFoundCode };
         }
 
-        object UpdateTask(int id, dynamic parameters)
+        internal static object UpdateTask(int id, dynamic parameters)
         {
             PetaPoco.Database db = Backend.Sysdata.Get();
             Backend.Task t = null;
